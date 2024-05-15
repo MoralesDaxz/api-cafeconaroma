@@ -2,13 +2,13 @@
   "name": "api-cafeconaroma",
   "version": "1.0.0",
   "description": "Api para Cafe con Aroma",
-  "main": "app/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "next build",
     "start": "next start",
-    "dev": "nodemon app/index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": ["node","js"],
   "author": "Alfredo Morales",
