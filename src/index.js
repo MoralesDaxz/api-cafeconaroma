@@ -1,11 +1,13 @@
 import express from "express";
 import fs from "fs";
 import bodyParser from "body-parser";
+import cors from "cors";
+
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 const apiUrl = "https://api-cafeconaroma.onrender.com/products";
-
-
+const port = process.env.PORT || 3000;
 const readData = () => {
   try {
     const data = fs.readFileSync("db/db-coffee.json");
@@ -80,9 +82,8 @@ app.delete("/products/remove/:id", (req, res) => {
   writeData(data);
   res.json({ message: "Coffee deleted successfully" });
   if (condition) {
-    
   }
 });
-app.listen(3000, () => {
-  console.log("Server on port 3000");
+app.listen(port, () => {
+  console.log("Server on port", port);
 });

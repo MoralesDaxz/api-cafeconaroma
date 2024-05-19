@@ -10,10 +10,14 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
-  "keywords": ["node","js"],
+  "keywords": [
+    "node",
+    "js"
+  ],
   "author": "Alfredo Morales",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   },
   "devDependencies": {
