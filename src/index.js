@@ -27,14 +27,8 @@ const writeData = (data) => {
 };
 
 app.get("/", (req, res) => {
-  try {
-    const response = readData();
-    return res.json(response);
-  } catch (error) {
-    console.log("No esta leyendo la DB \n", error);
-  }
-/*   res.send("Bienvenidos a API cafe con aroma");
-  res.redirect("https://morales-dev.vercel.app/"); */ 
+  res.send("Bienvenidos a API cafe con aroma");
+  /*  res.redirect("https://morales-dev.vercel.app/"); */
 });
 
 app.get("/products", (req, res) => {
@@ -72,8 +66,6 @@ app.put("/products/:id", (req, res) => {
   const body = req.body;
   const id = req.params.id;
   const coffeeIndex = data.products.findIndex((item) => item._id === id);
-  console.log(coffeeIndex);
-  /* -1 entonces NO HAY */
   if (coffeeIndex !== -1) {
     data.products[coffeeIndex] = {
       ...data.products[coffeeIndex],
