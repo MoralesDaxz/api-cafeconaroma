@@ -8,6 +8,7 @@ app.use(cors());
 app.use(bodyParser.json());
 const apiUrl = "https://api-cafeconaroma.onrender.com/products";
 const port = process.env.PORT || 3000;
+
 const readData = () => {
   try {
     const data = fs.readFileSync("db/db-coffee.json");
@@ -26,13 +27,23 @@ const writeData = (data) => {
 };
 
 app.get("/", (req, res) => {
-  res.send("Bienvenidos a API cafe con aroma");
-  /*   res.redirect("https://morales-dev.vercel.app/"); */
+  try {
+    const response = readData();
+    return res.json(response);
+  } catch (error) {
+    console.log("No esta leyendo la DB \n", error);
+  }
+/*   res.send("Bienvenidos a API cafe con aroma");
+  res.redirect("https://morales-dev.vercel.app/"); */ 
 });
 
 app.get("/products", (req, res) => {
-  const response = readData();
-  return res.json(response.products);
+  try {
+    const response = readData();
+    return res.json(response);
+  } catch (error) {
+    console.log("No esta leyendo la DB \n", error);
+  }
 });
 /* Buscar */
 app.get("/products/:id", (req, res) => {
