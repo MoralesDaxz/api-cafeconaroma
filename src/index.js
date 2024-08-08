@@ -39,6 +39,7 @@ app.get("/products", (req, res) => {
     console.log("No esta leyendo la DB \n", error);
   }
 });
+
 /* Buscar */
 app.get("/products/:id", (req, res) => {
   const id = req.params.id;
@@ -46,20 +47,18 @@ app.get("/products/:id", (req, res) => {
   const coffee = response.products.find((item) => item._id === id);
   coffee !== undefined
     ? res.send(coffee)
-    : res.send(`Coffee "${id}" not found `);
+    : res.send(`Coffee ${id} no found`);
 });
+
 /* Crear */
 app.post("/products/create", (req, res) => {
   const data = readData();
   const body = req.body;
-  /*  const newCoffee = {
-    id: data.products.length + 1,
-    ...body,
-  }; */
   data.products.push(body);
   writeData(data);
   res.json(body);
 });
+
 /* Actualizar */
 app.put("/products/:id", (req, res) => {
   const data = readData();
@@ -74,18 +73,19 @@ app.put("/products/:id", (req, res) => {
     writeData(data);
     return res.json({ message: `Coffee ${id} updated successfully` });
   }
-  res.json({ message: `No found Coffee ${id}` });
+  res.json({ message: `Coffee ${id} no found`  });
 });
 
 app.delete("/products/remove/:id", (req, res) => {
   const data = readData();
   const id = parseInt(req.params.id);
-  const coffeIndex = data.products.findIndex((item) => item._id === id);
-  data.products.splice(coffeIndex, 1);
-  writeData(data);
-  res.json({ message: "Coffee deleted successfully" });
-  if (condition) {
+  const coffeeIndex = data.products.findIndex((item) => item._id === id);
+  if (coffeeIndex !== -1) {
+    data.products.splice(coffeeIndex, 1);
+    writeData(data);
+    return res.json({ message: `Coffee ${id} deleted successfully ` });
   }
+  res.json({ message: `Coffee ${id} no found` });
 });
 app.listen(port, () => {
   console.log("Server on port", port);
